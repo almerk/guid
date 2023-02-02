@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Attributes;
+using GuidConversion;
 
 BenchmarkRunner.Run<GuidBenchmark>();
 
@@ -12,7 +13,11 @@ public class GuidBenchmark
     [Benchmark]
     public string ToStringSimpleB() => ToStringSimple(Guid);
     [Benchmark]
+    public string ToStringOptimizedB() => Guid.ToUrlParameterString();
+    [Benchmark]
     public Guid FromStringSimpleB () => FromStringSimple(GuidStr);
+    [Benchmark]
+    public Guid FromStringOptimizedB () => GuidStr.FromUrlParameterString();
 
 
     static string ToStringSimple(Guid guid)
